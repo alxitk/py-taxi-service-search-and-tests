@@ -79,8 +79,8 @@ class ManufacturerCreateViewTest(TestCase):
             "name": "Another Manufacturer", "country": "Another Country"
         }
 
-        response = self.client.post(
-            reverse("taxi:manufacturer-create"), data=form_data
+        response = self.client.post(reverse(
+            "taxi:manufacturer-create"), data=form_data
         )
         self.assertRedirects(response, reverse("taxi:manufacturer-list"))
         self.assertEqual(Manufacturer.objects.count(), 2)
@@ -96,8 +96,8 @@ class ManufacturerCreateViewTest(TestCase):
         self.client.force_login(self.user)
 
         form_data = {"name": "", "country": "Country"}
-        response = self.client.post(
-            reverse("taxi:manufacturer-create"), data=form_data
+        response = self.client.post(reverse(
+            "taxi:manufacturer-create"), data=form_data
         )
         self.assertEqual(response.status_code, 200)
         self.assertFormError(
@@ -177,7 +177,8 @@ class ManufacturerDeleteViewTest(TestCase):
     def test_delete_view(self):
         self.client.force_login(self.user)
         url = reverse(
-            self.MANUFACTURER_DELETE_URL_NAME, args=[self.manufacturer.id]
+            self.MANUFACTURER_DELETE_URL_NAME,
+            args=[self.manufacturer.id]
         )
         response = self.client.post(url, follow=True)
         self.assertRedirects(response, reverse("taxi:manufacturer-list"))
