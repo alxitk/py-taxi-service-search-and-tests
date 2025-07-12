@@ -239,7 +239,7 @@ class CarUpdateViewTest(TestCase):
         form_data = {
             "model": "Test Car",
             "manufacturer": self.manufacturer.id,
-            # "drivers": [self.driver.id],
+
         }
         response = self.client.post(url, data=form_data)
         self.assertEqual(response.status_code, 200)

@@ -112,3 +112,12 @@ class DriverModelTest(TestCase):
     def test_license_number_ends_with_numbers(self):
         self.assertGreaterEqual(len(self.driver.license_number), 3)
         self.assertTrue(self.driver.license_number[3:].isdigit())
+
+    def test_driver_str_method(self):
+        self.assertEqual(
+            str(self.driver),
+            f""
+            f"{self.driver.username} ("
+            f"{self.driver.first_name} "
+            f"{self.driver.last_name})"
+        )
